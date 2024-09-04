@@ -4,6 +4,7 @@ export const FoodCartContext = createContext({
   items: [],
   meals: [],
   addItemToCart: () => {},
+  updateQuantity: () => {},
 });
 
 export default function FoodCartContextProvider({ children }) {
@@ -55,10 +56,33 @@ export default function FoodCartContextProvider({ children }) {
     });
   }
 
+  function handleUpdateQuantity(productId, amount) {
+    setFoodCart((prev) => {
+      const updatedItems = [...prev.items];
+      const updatedItemIndex = updatedItems.findIndex(
+        (item) => item.id === productId
+      );
+      const itemToBeUpdated = { ...updatedItems[updatedItemIndex] };
+
+      itemToBeUpdated.quantity += amount;
+
+      if (itemToBeUpdated.quantity <= 0) {
+        updatedItems.splice(updatedItemIndex, 1);
+      } else {
+        updatedItems[updatedItemIndex] = itemToBeUpdated;
+      }
+
+      return {
+        items: updatedItems,
+      };
+    });
+  }
+
   const ctxValue = {
     items: foodCart.items,
     meals: meals,
     addItemToCart: handleAddToCart,
+    updateQuantity: handleUpdateQuantity,
   };
 
   return (
