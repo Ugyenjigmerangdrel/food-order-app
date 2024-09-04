@@ -14,7 +14,8 @@ export default function Header() {
 
   const modalActions = (
     <div className="modal-actions">
-      <button className="button">Close</button>
+      <button className="text-button">Close</button>
+      {items.length > 0 && <button className="button">Checkout</button>}
     </div>
   );
   return (
