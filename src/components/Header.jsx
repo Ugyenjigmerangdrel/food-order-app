@@ -12,7 +12,11 @@ export default function Header() {
     modal.current.open();
   }
 
-  const modalActions = <button className="button">Close</button>;
+  const modalActions = (
+    <div className="modal-actions">
+      <button className="button">Close</button>
+    </div>
+  );
   return (
     <>
       <CartModal ref={modal} title="Food Cart" actions={modalActions} />

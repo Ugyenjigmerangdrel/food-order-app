@@ -18,6 +18,7 @@ export default function Cart() {
         ))}
       </ul>
       <h2 className="cart-total">$45.99</h2>
+      <div className="cart-item-actions"></div>
     </div>
   );
 }
