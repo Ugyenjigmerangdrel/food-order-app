@@ -1,9 +1,13 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
+import { FoodCartContext } from "../context/food-cart-context";
+
 import LogoImg from "../assets/logo.jpg";
 import CartModal from "./CartModal";
 
 export default function Header() {
+  const { items } = useContext(FoodCartContext);
   const modal = useRef();
+
   function handleModalOpen() {
     modal.current.open();
   }
@@ -17,7 +21,7 @@ export default function Header() {
           <img src={LogoImg} alt="logo" />
         </div>
         <button onClick={handleModalOpen} className="text-button">
-          Cart
+          Cart({items.length > 0 ? items.length : 0})
         </button>
       </div>
     </>
