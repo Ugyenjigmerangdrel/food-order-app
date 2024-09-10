@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { FoodCartContext } from "../context/food-cart-context";
+import Error from "./UI/ErrorPage";
 import useHttp from "../hooks/useHttps";
 import MealItem from "./MealItem";
 
@@ -15,7 +16,11 @@ export default function Meals() {
   } = useHttp("http://localhost:3000/meals", requestConfig, []);
 
   if (isLoading) {
-    return <p>Fetching meals.....</p>;
+    return <p className="center">Fetching meals.....</p>;
+  }
+
+  if (error) {
+    return <Error title="Failed to Fetch the Meals" message={error} />;
   }
 
   return (
